@@ -23,7 +23,7 @@ namespace hough
   	map_.resize(size_);
   	int r_index;
   	int th_index;
-  	for(int i = 0; i<map_.size(); i++)
+  	for(int i = 0; i < map_.size(); i++)
   	{
   	  r_index = i % width_;
   	  th_index = i / width_;

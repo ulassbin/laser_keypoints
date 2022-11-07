@@ -19,7 +19,7 @@ namespace extractor
     double inc =  msg.angle_increment;
     double x,y;
     hough_map_.clear();
-    for(int i =0; i<msg.ranges.size(); i++)
+    for(int i = 0; i < msg.ranges.size(); i++)
     {
       if(!std::isnan(msg.ranges[i]))
         hough_map_.append(msg.ranges[i]*cos(min_ang+i*inc),msg.ranges[i]*sin(min_ang+i*inc));

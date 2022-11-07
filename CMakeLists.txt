@@ -118,9 +118,15 @@ add_library(hough src/hough.cpp)
 add_dependencies(hough ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(hough ${catkin_LIBRARIES})
 
+add_library(keypoints_base src/keypoints_base.cpp)
+add_dependencies(keypoints_base ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(keypoints_base ${catkin_LIBRARIES})
+
+
+
 add_library(extractor src/extractor.cpp)
 add_dependencies(extractor ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(extractor hough ${catkin_LIBRARIES})
+target_link_libraries(extractor hough keypoints_base ${catkin_LIBRARIES})
 
 add_executable(extractor_node src/extractor_node.cpp)
 target_link_libraries(extractor_node extractor ${catkin_LIBRARIES})
