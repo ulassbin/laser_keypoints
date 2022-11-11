@@ -10,6 +10,9 @@ namespace extractor
   	hough_map_ = temp;
     hough_map_.pub_ = nh.advertise<nav_msgs::OccupancyGrid>("hough_map", 5, true);
     laser_sub_ = nh.subscribe<sensor_msgs::LaserScan>("scan",10, &Extractor::messageCallback, this);
+
+    laser_pub_ = nh.advertise<sensor_msgs::LaserScan>("scan_rotated", 10, false);
+
   }
 
   void Extractor::messageCallback(const sensor_msgs::LaserScan msg)
@@ -26,5 +29,11 @@ namespace extractor
     }
     hough_map_.calcStatistics();
     hough_map_.visualize();
+    sensor_msgs::LaserScan scan_rotated = msg;
+    scan_rotated.angle_min = scan_rotated.angle_min - hough_map_.dominant_ang_;
+    scan_rotated.angle_max = scan_rotated.angle_max - hough_map_.dominant_ang_;
+    laser_pub_.publish(scan_rotated);
+    ocd_detector_.formSets(scan_rotated);
+    ocd_detector_.visualizePoints();
   };
 }

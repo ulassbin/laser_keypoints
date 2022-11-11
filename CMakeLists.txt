@@ -9,6 +9,7 @@ project(laser_keypoints)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
+  pcl_ros
   roscpp
   sensor_msgs
   nav_msgs
